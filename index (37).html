@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>עתידים לקריירה · המסלול שלי</title>
+<meta name="description" content="כל המידע על שנת התכנית בעתידים – דרישות, סדנאות ושיחות ליווי לפי שנתון.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#28235e; --navy-2:#3a3480;
+    --pink:#f78bd0; --pink-soft:#fde6f5;
+    --blue:#bfdcf5; --blue-strong:#4a93d6; --blue-soft:#e8f2fb;
+    --purple:#6d6399; --purple-soft:#ebe8f4;
+    --bg:#f7f4ef; --card:#fff; --ink:#1f1d33; --muted:#6b6880; --line:#e6e1da;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  button{font:inherit}
+
+  /* Top bar */
+  .topbar{position:sticky;top:0;z-index:30;background:rgba(247,244,239,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .topbar-in{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy)}
+  .brand-mark{width:38px;height:38px;border-radius:11px;background:var(--navy);display:grid;place-items:center;color:#fff;font-weight:800;font-size:20px;position:relative}
+  .brand-mark::after{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:var(--pink);top:6px;left:6px}
+  .brand b{font-size:21px;font-weight:800;display:block;line-height:1.05}
+  .brand small{font-size:13px;color:var(--muted);font-weight:500}
+  nav{display:flex;gap:2px}
+  nav a{color:var(--ink);text-decoration:none;font-weight:500;font-size:15px;padding:8px 12px;border-radius:8px}
+  nav a:hover{background:#ece7df}
+  @media(max-width:760px){nav{display:none}}
+
+  /* Hero */
+  .hero{padding:28px 0 8px}
+  .hero-card{background:var(--navy);color:#fff;border-radius:28px;padding:44px 40px 36px;position:relative;overflow:hidden}
+  .hero-card::before{content:"";position:absolute;left:-90px;bottom:-120px;width:320px;height:320px;border-radius:50%;background:var(--pink);opacity:.16}
+  .hero-card::after{content:"";position:absolute;left:120px;top:-60px;width:140px;height:140px;border-radius:50%;background:var(--blue);opacity:.12}
+  .hero-card > *{position:relative;z-index:1}
+  .eyebrow{font-size:14px;font-weight:500;opacity:.75;margin-bottom:6px}
+  h1{font-size:clamp(30px,5vw,48px);line-height:1.15;font-weight:800;letter-spacing:-.5px}
+  h1 span{color:var(--pink)}
+  .lead{font-size:18px;opacity:.85;margin-top:12px;max-width:560px}
+  .picker{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+  .picker-label{font-weight:700;font-size:16px;width:100%}
+  .seg{display:inline-flex;background:rgba(255,255,255,.1);padding:4px;border-radius:14px;gap:4px;flex-wrap:wrap}
+  .seg button{border:0;background:transparent;color:#fff;font-weight:700;font-size:16px;padding:10px 20px;border-radius:10px;cursor:pointer;transition:background .15s}
+  .seg button:hover{background:rgba(255,255,255,.12)}
+  .seg button[aria-pressed="true"]{background:#fff;color:var(--navy)}
+  .switch{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-weight:500;user-select:none}
+  .switch input{position:absolute;opacity:0;pointer-events:none}
+  .switch .track{width:46px;height:26px;border-radius:13px;background:rgba(255,255,255,.25);position:relative;transition:.2s;flex-shrink:0}
+  .switch .track::after{content:"";position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+  .switch input:checked + .track{background:var(--pink)}
+  .switch input:checked + .track::after{right:23px}
+  .switch input:focus-visible + .track{outline:2px solid #fff;outline-offset:2px}
+  .share{margin-inline-start:auto;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;padding:9px 16px;border-radius:10px;cursor:pointer;font-weight:500;font-size:14px}
+  .share:hover{background:rgba(255,255,255,.1)}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+  .stat{background:rgba(255,255,255,.08);border-radius:16px;padding:14px 16px;border-top:4px solid}
+  .stat.req{border-color:var(--pink)} .stat.work{border-color:var(--blue)} .stat.guide{border-color:#a99fd6}
+  .stat b{font-size:30px;font-weight:800;display:block;line-height:1.1}
+  .stat span{font-size:14px;opacity:.85}
+  @media(max-width:640px){
+    .hero-card{padding:32px 22px 24px;border-radius:22px}
+    .stats{grid-template-columns:1fr 1fr 1fr;gap:8px}
+    .stat{padding:10px}
+    .stat b{font-size:24px}
+    .stat span{font-size:12px}
+    .share{margin-inline-start:0}
+    .seg{display:grid;grid-template-columns:repeat(4,1fr);width:100%}
+    .seg button{padding:10px 0;font-size:15px}
+  }
+
+  /* Sections */
+  section{padding:36px 0 8px}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  h2{font-size:28px;font-weight:800;color:var(--navy);line-height:1.2}
+  .sec-sub{color:var(--muted);font-size:16px;margin-top:4px}
+
+  /* Now */
+  .now-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+  @media(max-width:760px){.now-grid{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px}
+  .panel.now{border:2px solid var(--navy)}
+  .panel-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .pill{font-size:13px;font-weight:700;padding:3px 12px;border-radius:99px;background:var(--navy);color:#fff}
+  .pill.soft{background:#ece7df;color:var(--ink)}
+  .panel h3{font-size:22px;font-weight:800}
+  .list{display:flex;flex-direction:column;gap:8px}
+
+  /* Items */
+  .item{border-radius:12px;padding:10px 14px;font-size:15px;border-inline-start:4px solid;line-height:1.45}
+  .item.req{background:var(--pink-soft);border-color:var(--pink)}
+  .item.work{background:var(--blue-soft);border-color:var(--blue-strong)}
+  .item.guide{background:var(--purple-soft);border-color:var(--purple)}
+  .item .kind{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-bottom:1px}
+  .item strong{font-weight:700}
+  .item .val{display:inline-block;font-weight:800;font-size:13px;background:#fff;border-radius:6px;padding:0 7px;margin-inline-start:6px}
+  .item .meta{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+  .empty{color:var(--muted);font-size:15px;padding:6px 0}
+
+  /* Filters */
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:6px 14px;font-size:14px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:7px;color:var(--ink)}
+  .chip i{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .chip.req i{background:var(--pink)} .chip.work i{background:var(--blue-strong)} .chip.guide i{background:var(--purple)}
+  .chip[aria-pressed="false"]{opacity:.45}
+  .chip[aria-pressed="true"]{border-color:var(--navy)}
+
+  /* Month grid */
+  .months{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .month{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px}
+  .month.past{opacity:.5}
+  .month.current{border-color:var(--navy);box-shadow:0 0 0 2px var(--navy)}
+  .month h3{display:flex;justify-content:space-between;align-items:center;font-size:19px;font-weight:800;color:var(--navy);margin-bottom:4px}
+  .month h3 .pill{font-size:12px}
+
+  /* How it works */
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:860px){.how{grid-template-columns:1fr}}
+  .how-card{background:var(--card);border-radius:20px;padding:22px;border:1px solid var(--line);border-top:6px solid}
+  .how-card.req{border-top-color:var(--pink)} .how-card.work{border-top-color:var(--blue-strong)} .how-card.guide{border-top-color:var(--purple)}
+  .how-card h3{font-size:20px;font-weight:800;color:var(--navy);margin-bottom:8px}
+  .how-card p{font-size:15px;color:#3c3a50}
+  .how-card ul{margin-top:10px;padding-inline-start:18px;font-size:15px;color:#3c3a50}
+  .how-card li{margin-bottom:3px}
+
+  /* Gantt */
+  .gantt-wrap{overflow-x:auto;background:#fff;border-radius:20px;border:1px solid var(--line);padding:8px}
+  table.gantt{border-collapse:separate;border-spacing:4px;min-width:980px;width:100%;font-size:13px;table-layout:fixed}
+  .gantt col.lab{width:110px}
+  .gantt th.mon{background:var(--navy);color:#fff;padding:10px 4px;border-radius:8px;font-weight:700;font-size:14px}
+  .gantt th.mon.cur{background:var(--pink);color:var(--navy)}
+  .gantt .rowlab{position:sticky;right:0;background:#fff;z-index:2;font-weight:700;padding:8px 8px;white-space:nowrap;text-align:right;font-size:14px}
+  .gantt tr.mine .rowlab{color:var(--navy)}
+  .gantt tr.mine .rowlab::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pink);margin-inline-end:6px;vertical-align:middle}
+  .gantt tr.cat td{padding:16px 4px 2px}
+  .gantt tr.cat span{position:sticky;right:6px;font-weight:800;font-size:16px;color:var(--navy)}
+  .gantt td.cell{border-radius:8px;padding:6px 4px;text-align:center;height:50px;vertical-align:middle;line-height:1.3}
+  .gantt tr.req td.cell{background:#fdf0f8}
+  .gantt tr.req td.cell.on{background:var(--pink)}
+  .gantt tr.work td.cell{background:#f1f7fc}
+  .gantt tr.work td.cell.on{background:var(--blue)}
+  .gantt tr.guide td.cell{background:#f1f0f6}
+  .gantt tr.guide td.cell.on{background:var(--purple);color:#fff;font-weight:600;font-size:14px}
+  .gantt tr:not(.mine) td.cell.on{opacity:.55}
+  .gantt tr.mine td.cell.on{opacity:1}
+  .gantt-note{font-size:14px;color:var(--muted);margin-top:10px}
+  .gantt-note i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pink);margin-inline-end:4px}
+
+  footer{margin-top:48px;padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:10px 18px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:50}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#top" aria-label="עתידים לקריירה">
+      <span class="brand-mark">ע</span>
+      <span><b>עתידים</b><small>לקריירה</small></span>
+    </a>
+    <nav aria-label="ניווט">
+      <a href="#now">החודש</a>
+      <a href="#path">המסלול שלי</a>
+      <a href="#how">איך זה עובד</a>
+      <a href="#gantt">הגאנט המלא</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero wrap" id="top">
+    <div class="hero-card">
+      <p class="eyebrow">עתידים לתעשייה ולהייטק</p>
+      <h1>כל השנה שלכם בתכנית,<br><span>במקום אחד</span></h1>
+      <p class="lead">דרישות, סדנאות ושיחות ליווי – לפי השנה שלכם, חודש אחרי חודש.</p>
+
+      <div class="picker">
+        <span class="picker-label">באיזו שנה אתם?</span>
+        <div class="seg" id="yearSeg" role="group" aria-label="בחירת שנה"></div>
+        <label class="switch">
+          <input type="checkbox" id="empToggle">
+          <span class="track" aria-hidden="true"></span>
+          <span>אני מועסק/ת</span>
+        </label>
+        <button class="share" id="shareBtn" type="button">העתקת קישור לשנה הזו</button>
+      </div>
+
+      <div class="stats" id="stats"></div>
+    </div>
+  </div>
+
+  <section id="now">
+    <div class="wrap now-grid">
+      <article class="panel now" id="nowCard"></article>
+      <article class="panel" id="nextCard"></article>
+    </div>
+  </section>
+
+  <section id="path">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>המסלול שלי השנה</h2>
+          <p class="sec-sub" id="pathSub"></p>
+        </div>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div class="months" id="months"></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>איך בנויה התכנית</h2><p class="sec-sub">שלושה רבדים שמלווים אתכם לאורך כל התואר</p></div></div>
+      <div class="how">
+        <div class="how-card req">
+          <h3>דרישות התכנית</h3>
+          <p>לאורך השנה נבדקת העמידה בדרישות התכנית:</p>
+          <ul>
+            <li>התקדמות בהתנדבות – 12, 40 ו-60 מתוך 60</li>
+            <li>ממוצע 75 – פעמיים בשנה (משנה ב׳)</li>
+            <li>בשנה ב׳ גם בדיקת קו״ח ולינקדאין בסוף השנה</li>
+            <li>סטודנטים מועסקים – בדיקת ממוצע בלבד</li>
+          </ul>
+        </div>
+        <div class="how-card work">
+          <h3>חוץ-אקדמי</h3>
+          <p>סדנאות ומפגשים שבונים אתכם לקראת עולם התעסוקה – חלקם לשנתון שלכם וחלקם פתוחים לכל השנתונים:</p>
+          <ul>
+            <li>קורס אנגלית ומפגשי נטוורקינג</li>
+            <li>מפגשי זרקור וסיורי חברות</li>
+            <li>סדנת חיפוש עבודה עם AI וסדנה פיננסית</li>
+          </ul>
+        </div>
+        <div class="how-card guide">
+          <h3>מודל ליווי</h3>
+          <p>ליווי אישי לאורך כל התואר:</p>
+          <ul>
+            <li>שיחה אישית בכל סמסטר</li>
+            <li>בשנה א׳ – גם שיחה בתקופת המבחנים</li>
+            <li>בשנים ג׳–ד׳ – מפגש קבוצתי בסמסטר ב׳ (מועסקים / לא מועסקים)</li>
+            <li>בשנה ד׳ – שיחת סמסטר א׳ לפי צורך</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gantt">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>הגאנט המלא</h2><p class="sec-sub">ארבע שנות התכנית בתמונה אחת</p></div></div>
+      <div class="gantt-wrap">
+        <table class="gantt" id="ganttTable"></table>
+      </div>
+      <p class="gantt-note"><i></i>השורות המודגשות רלוונטיות לשנה שבחרתם</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">עתידים לתעשייה ולהייטק · עתידים לקריירה</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =========================================================
+   עדכון תוכן: כל הפעילויות נמצאות במערך EVENTS למטה.
+   c  = קטגוריה: req (דרישות תכנית) / work (חוץ-אקדמי) / guide (מודל ליווי)
+   r  = שורה:   a / b / c / d (שנה א–ד), emp (מועסקים), all (כלל השנתונים)
+   m  = חודש:   0=אוקטובר ... 9=יולי. טווח: [התחלה, סוף], למשל [0,3]
+   t  = כותרת,  d = ערך קצר (לא חובה)
+   ========================================================= */
+const MONTHS = ['אוקטובר','נובמבר','דצמבר','ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי'];
+const JS_MONTH = [9,10,11,0,1,2,3,4,5,6];
+
+const VOL = 'בדיקת התנדבות', AVG = 'בדיקת ממוצע';
+const SEM_A = 'שיחה סמסטר א׳', SEM_B = 'שיחה סמסטר ב׳', GROUP = 'מפגש קבוצתי מועסקים / לא מועסקים';
+
+const EVENTS = [
+  // ---------- דרישות תכנית ----------
+  {c:'req', r:'a', m:2, t:VOL, d:'12/60'},
+  {c:'req', r:'a', m:5, t:VOL, d:'40/60'},
+  {c:'req', r:'a', m:7, t:VOL, d:'60/60'},
+
+  {c:'req', r:'b', m:1, t:AVG, d:'75'},
+  {c:'req', r:'b', m:2, t:VOL, d:'12/60'},
+  {c:'req', r:'b', m:5, t:VOL, d:'40/60'},
+  {c:'req', r:'b', m:6, t:AVG, d:'75'},
+  {c:'req', r:'b', m:8, t:VOL, d:'60/60'},
+  {c:'req', r:'b', m:9, t:'בדיקת קו״ח ולינקדאין'},
+
+  {c:'req', r:'c', m:1, t:AVG, d:'75'},
+  {c:'req', r:'c', m:2, t:VOL, d:'12/60'},
+  {c:'req', r:'c', m:5, t:VOL, d:'40/60'},
+  {c:'req', r:'c', m:6, t:AVG, d:'75'},
+  {c:'req', r:'c', m:8, t:VOL, d:'60/60'},
+
+  {c:'req', r:'d', m:1, t:AVG, d:'75'},
+  {c:'req', r:'d', m:2, t:VOL, d:'12/60'},
+  {c:'req', r:'d', m:5, t:VOL, d:'40/60'},
+  {c:'req', r:'d', m:6, t:AVG, d:'75'},
+  {c:'req', r:'d', m:8, t:VOL, d:'60/60'},
+
+  {c:'req', r:'emp', m:1, t:AVG, d:'75'},
+  {c:'req', r:'emp', m:6, t:AVG, d:'75'},
+
+  // ---------- חוץ-אקדמי ----------
+  {c:'work', r:'a', m:0, t:'סדנת הכנה לאקדמיה'},
+  {c:'work', r:'a', m:3, t:'סדנת הכנה לתקופת מבחנים'},
+  {c:'work', r:'a', m:9, t:'סדנת הכנה לעולם התעסוקה'},
+
+  {c:'work', r:'b', m:1, t:'סדנת כתיבת קורות חיים'},
+  {c:'work', r:'b', m:2, t:'סדנת לינקדאין'},
+  {c:'work', r:'b', m:5, t:'סדנת כתיבת קורות חיים'},
+  {c:'work', r:'b', m:6, t:'סדנת לינקדאין'},
+  {c:'work', r:'b', m:7, t:'הכנה לראיונות טכניים'},
+  {c:'work', r:'b', m:9, t:'חיפוש עבודה לקיץ'},
+
+  {c:'work', r:'c', m:1, t:'יצירת פורטפוליו'},
+  {c:'work', r:'c', m:6, t:'סטוריטלינג'},
+  {c:'work', r:'c', m:9, t:'חיפוש עבודה לקיץ'},
+
+  {c:'work', r:'d', m:2, t:'תכנון קריירה לטווח ארוך'},
+  {c:'work', r:'d', m:6, t:'Work-Life Balance'},
+  {c:'work', r:'d', m:8, t:'הצטרפות לארגון הבוגרים'},
+
+  {c:'work', r:'all', m:0, t:'קורס אנגלית'},
+  {c:'work', r:'all', m:1, t:'מפגש נטוורקינג'},
+  {c:'work', r:'all', m:2, t:'סדנת חיפוש עבודה עם AI'},
+  {c:'work', r:'all', m:3, t:'מפגש זרקור'},
+  {c:'work', r:'all', m:6, t:'מפגש זרקור'},
+  {c:'work', r:'all', m:7, t:'סדנה פיננסית'},
+  {c:'work', r:'all', m:8, t:'מפגש נטוורקינג'},
+  {c:'work', r:'all', m:9, t:'סיורי חברות'},
+
+  // ---------- מודל ליווי ----------
+  {c:'guide', r:'a', m:[0,3], t:SEM_A},
+  {c:'guide', r:'a', m:4,     t:'שיחה בתקופת מבחנים'},
+  {c:'guide', r:'a', m:[5,8], t:SEM_B},
+
+  {c:'guide', r:'b', m:[0,3], t:SEM_A},
+  {c:'guide', r:'b', m:[5,8], t:SEM_B},
+
+  {c:'guide', r:'c', m:[0,3], t:SEM_A},
+  {c:'guide', r:'c', m:[5,8], t:GROUP},
+
+  {c:'guide', r:'d', m:[0,3], t:'שיחה סמסטר א׳ לפי צורך'},
+  {c:'guide', r:'d', m:[5,8], t:GROUP},
+];
+
+const YEARS = [['a','שנה א׳'],['b','שנה ב׳'],['c','שנה ג׳'],['d','שנה ד׳']];
+const ROW_LABEL = {a:'שנה א׳', b:'שנה ב׳', c:'שנה ג׳', d:'שנה ד׳', emp:'מועסקים', all:'כלל השנתונים'};
+const CATS = {
+  req:   {name:'דרישות התכנית', kind:'דרישת תכנית', stat:'בדיקות',        rows:['a','b','c','d','emp']},
+  work:  {name:'חוץ-אקדמי',     kind:'סדנה / מפגש', stat:'סדנאות ומפגשים', rows:['a','b','c','d','all']},
+  guide: {name:'מודל ליווי',     kind:'ליווי',       stat:'שיחות ומפגשי ליווי', rows:['a','b','c','d']},
+};
+const ORDER = {req:0, guide:1, work:2};
+
+/* ---------- state ---------- */
+const state = {year:'a', emp:false, cats:new Set(['req','work','guide'])};
+(function initState(){
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem('atidim-path') || '{}'); } catch(e) {}
+  const p = new URLSearchParams(location.search);
+  const y = p.get('year') || saved.year;
+  if (YEARS.some(([k]) => k === y)) state.year = y;
+  state.emp = p.has('emp') ? p.get('emp') === '1' : !!saved.emp;
+})();
+function persist(){
+  try { localStorage.setItem('atidim-path', JSON.stringify({year:state.year, emp:state.emp})); } catch(e) {}
+  const p = new URLSearchParams(location.search);
+  p.set('year', state.year);
+  state.emp ? p.set('emp','1') : p.delete('emp');
+  try { history.replaceState(null, '', location.pathname + '?' + p.toString() + location.hash); } catch(e) {}
+}
+
+/* ---------- time ---------- */
+const CUR_RAW = JS_MONTH.indexOf(new Date().getMonth());
+const PRE = CUR_RAW === -1;            // אוגוסט–ספטמבר: לפני תחילת השנה
+const CUR = PRE ? 0 : CUR_RAW;
+
+/* ---------- helpers ---------- */
+const span = e => Array.isArray(e.m) ? e.m : [e.m, e.m];
+const inMonth = (e, i) => { const [s,t] = span(e); return i >= s && i <= t; };
+function isMineRow(c, r){
+  if (c === 'req')  return r === (state.emp ? 'emp' : state.year);
+  if (c === 'work') return r === state.year || r === 'all';
+  return r === state.year;
+}
+const mine = e => isMineRow(e.c, e.r);
+function itemsFor(i, useFilter){
+  return EVENTS.filter(e => mine(e) && inMonth(e,i) && (!useFilter || state.cats.has(e.c)))
+               .sort((a,b) => ORDER[a.c] - ORDER[b.c]);
+}
+function itemHTML(e){
+  const [s,t] = span(e);
+  const meta = [];
+  if (s !== t) meta.push(`לאורך ${MONTHS[s]}–${MONTHS[t]}`);
+  if (e.r === 'all') meta.push('פתוח לכל השנתונים');
+  return `<div class="item ${e.c}">
+    <span class="kind">${CATS[e.c].kind}</span>
+    <strong>${e.t}</strong>${e.d ? `<span class="val">${e.d}</span>` : ''}
+    ${meta.length ? `<span class="meta">${meta.join(' · ')}</span>` : ''}
+  </div>`;
+}
+const listHTML = items => items.length
+  ? `<div class="list">${items.map(itemHTML).join('')}</div>`
+  : `<p class="empty">אין פעילויות מתוכננות בחודש הזה.</p>`;
+const yearName = () => YEARS.find(([k]) => k === state.year)[1] + (state.emp ? ' · מועסקים' : '');
+
+/* ---------- render ---------- */
+function renderPicker(){
+  document.getElementById('yearSeg').innerHTML = YEARS.map(([k,l]) =>
+    `<button type="button" data-y="${k}" aria-pressed="${k === state.year}">${l}</button>`).join('');
+  document.getElementById('empToggle').checked = state.emp;
+}
+function renderStats(){
+  const ev = EVENTS.filter(mine);
+  document.getElementById('stats').innerHTML = Object.entries(CATS).map(([c,cat]) =>
+    `<div class="stat ${c}"><b>${ev.filter(e => e.c === c).length}</b><span>${cat.stat}</span></div>`).join('');
+}
+function renderNow(){
+  const now = document.getElementById('nowCard');
+  const next = document.getElementById('nextCard');
+  now.innerHTML = `<div class="panel-top"><span class="pill">${PRE ? 'בקרוב' : 'החודש'}</span><h3>${MONTHS[CUR]}</h3></div>
+    ${PRE ? '<p class="empty" style="margin-bottom:10px">השנה נפתחת באוקטובר – זה מה שמחכה לכם:</p>' : ''}
+    ${listHTML(itemsFor(CUR, false))}`;
+  const n = CUR + 1;
+  next.innerHTML = n <= 9
+    ? `<div class="panel-top"><span class="pill soft">החודש הבא</span><h3>${MONTHS[n]}</h3></div>${listHTML(itemsFor(n, false))}`
+    : `<div class="panel-top"><span class="pill soft">סוף השנה</span><h3>נתראה באוקטובר</h3></div><p class="empty">יולי הוא החודש האחרון בשנת התכנית.</p>`;
+}
+function renderChips(){
+  document.getElementById('chips').innerHTML = Object.entries(CATS).map(([c,cat]) =>
+    `<button type="button" class="chip ${c}" data-c="${c}" aria-pressed="${state.cats.has(c)}"><i></i>${cat.name}</button>`).join('');
+}
+function renderMonths(){
+  document.getElementById('pathSub').textContent = `${yearName()} · אוקטובר עד יולי`;
+  document.getElementById('months').innerHTML = MONTHS.map((m,i) => {
+    const cls = ['month'];
+    if (!PRE && i === CUR) cls.push('current');
+    if (!PRE && i < CUR) cls.push('past');
+    return `<article class="${cls.join(' ')}">
+      <h3>${m}${!PRE && i === CUR ? '<span class="pill">עכשיו</span>' : ''}</h3>
+      ${listHTML(itemsFor(i, true))}
+    </article>`;
+  }).join('');
+}
+function renderGantt(){
+  let h = '<colgroup><col class="lab">' + MONTHS.map(() => '<col>').join('') + '</colgroup>';
+  h += '<thead><tr><th class="rowlab"></th>' +
+       MONTHS.map((m,i) => `<th class="mon${!PRE && i === CUR ? ' cur' : ''}" scope="col">${m}</th>`).join('') +
+       '</tr></thead><tbody>';
+  for (const [c,cat] of Object.entries(CATS)){
+    h += `<tr class="cat"><td colspan="11"><span>${cat.name}</span></td></tr>`;
+    for (const r of cat.rows){
+      h += `<tr class="${c}${isMineRow(c,r) ? ' mine' : ''}"><th class="rowlab" scope="row">${ROW_LABEL[r]}</th>`;
+      let i = 0;
+      while (i < 10){
+        const e = EVENTS.find(x => x.c === c && x.r === r && span(x)[0] === i);
+        if (e){
+          const [s,t] = span(e);
+          h += `<td class="cell on" colspan="${t - s + 1}">${e.t}${e.d ? `<br><b>${e.d}</b>` : ''}</td>`;
+          i = t + 1;
+        } else { h += '<td class="cell"></td>'; i++; }
+      }
+      h += '</tr>';
+    }
+  }
+  document.getElementById('ganttTable').innerHTML = h + '</tbody>';
+}
+function renderAll(){ renderPicker(); renderStats(); renderNow(); renderChips(); renderMonths(); renderGantt(); }
+
+/* ---------- events ---------- */
+document.getElementById('yearSeg').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  state.year = b.dataset.y; persist(); renderAll();
+});
+document.getElementById('empToggle').addEventListener('change', e => {
+  state.emp = e.target.checked; persist(); renderAll();
+});
+document.getElementById('chips').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const c = b.dataset.c;
+  if (state.cats.has(c)) { if (state.cats.size > 1) state.cats.delete(c); } else state.cats.add(c);
+  renderChips(); renderMonths();
+});
+function toast(msg){
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 2200);
+}
+document.getElementById('shareBtn').addEventListener('click', async () => {
+  const url = location.origin + location.pathname + `?year=${state.year}${state.emp ? '&emp=1' : ''}`;
+  try { await navigator.clipboard.writeText(url); toast('הקישור הועתק – אפשר לשלוח לקבוצת השנתון'); }
+  catch(e) { prompt('העתיקו את הקישור:', url); }
+});
+
+persist();
+renderAll();
+</script>
+</body>
+</html>
